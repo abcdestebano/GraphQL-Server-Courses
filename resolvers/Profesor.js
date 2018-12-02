@@ -1,6 +1,7 @@
 'use strict'
 
 const Profesor = require('../models/Profesor')
+const mongoose = require('mongoose')
 
 /**
  * Get all teachers from database
@@ -29,6 +30,27 @@ async function getTeacher(id) {
          populate: { path: "comentarios" }
       })
       return teacher
+   } catch (error) {
+      throw new Error(error)
+   }
+}
+
+/**
+ * Create a teacer on the database
+ *
+ * @param {*} { nombre, nacionalidad, genero }
+ * @returns
+ */
+async function createTeacher({ nombre, nacionalidad, genero }) {
+   const nuevoProfesor = new Profesor({
+      _id: mongoose.Types.ObjectId(),
+      nombre,
+      nacionalidad,
+      genero
+   });
+   try {
+      const teacherStored = nuevoProfesor.save()
+      return teacherStored
    } catch (error) {
       throw new Error(error)
    }
@@ -70,6 +92,7 @@ async function deleteTeacher(id) {
 module.exports = {
    getAllTeachers,
    getTeacher,
+   createTeacher,
    updateTeacher,
    deleteTeacher
 }

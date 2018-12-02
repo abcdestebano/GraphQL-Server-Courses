@@ -15,6 +15,15 @@ const rootQuery = gql`
       curso(id: String!): Curso
       profesor(id: String!): Profesor
    }
+
+   type Mutation {
+      profesorAdd(teacher: NewTeacher): Profesor
+      profesorEdit(idTeacher: String!, teacher: EditTeacher): Profesor
+      profesorDelete(idTeacher: String!): Profesor
+      cursoAdd(course: NewCourse): Curso
+      cursoEdit(idCourse: String!, course: EditCourse): Curso
+      cursoDelete(idCourse: String!): Curso
+   }
 `
 
 module.exports = makeExecutableSchema({

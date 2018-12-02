@@ -1,6 +1,7 @@
 'use strict'
 
 const Curso = require('../models/Curso')
+const mongoose = require('mongoose')
 
 /**
  * Get all courses from database
@@ -9,7 +10,7 @@ const Curso = require('../models/Curso')
  */
 async function getAllCourses() {
    try {
-      const courses = await Curso.find().populate('profesor').populate('comentarios')
+      const courses = await Curso.find().populate('profesor')
       return courses
    } catch (error) {
       throw new Error(error)
@@ -40,11 +41,12 @@ async function getCourse(id) {
  * @param {*} { titulo, descripcion }
  * @returns
  */
-async function createCourse({ titulo, descripcion }) {
+async function createCourse({ titulo, descripcion, profesor }) {
    const course = new Curso({
       _id: mongoose.Types.ObjectId(),
       titulo,
       descripcion,
+      profesor
    })
    try {
       const courseStored = await course.save()

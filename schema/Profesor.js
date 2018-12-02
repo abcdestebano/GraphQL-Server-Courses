@@ -11,6 +11,18 @@ const Profesor = `
       MASCULINO
       FEMENINO
    }
+
+   input NewTeacher {
+      nombre: String!
+      genero: Genero
+      nacionalidad: String!
+   }
+  
+   input EditTeacher {
+      nombre: String
+      genero: Genero
+      nacionalidad: String
+   }
 `
 
 module.exports = Profesor

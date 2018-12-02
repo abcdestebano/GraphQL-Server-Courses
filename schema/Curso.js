@@ -15,6 +15,18 @@ const Curso = `
     nombre: String!
     cuerpo: String!
   }
+
+  input NewCourse {
+    titulo: String!
+    descripcion: String!  
+    profesor: String!
+  }
+
+  input EditCourse {
+    titulo: String!
+    descripcion: String!
+    rating: Float
+  }
 `;
 
 module.exports = Curso
