@@ -23,9 +23,9 @@ const Curso = `
   }
 
   input EditCourse {
-    titulo: String!
-    descripcion: String!
-    rating: Float
+    titulo: String
+    descripcion: String
+    profesor: String
   }
 `;
 

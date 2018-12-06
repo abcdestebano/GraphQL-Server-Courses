@@ -9,20 +9,23 @@ const Profesor = require('./Profesor')
 const resolvers = require('../resolvers')
 
 const rootQuery = gql`
+   union ResultadoBusqueda = Profesor | Curso
+
    type Query {
       cursos: [Curso]
       profesores: [Profesor]
       curso(id: String!): Curso
       profesor(id: String!): Profesor
+      buscar(query: String!): [ResultadoBusqueda]
    }
 
    type Mutation {
       profesorAdd(teacher: NewTeacher): Profesor
-      profesorEdit(idTeacher: String!, teacher: EditTeacher): Profesor
-      profesorDelete(idTeacher: String!): Profesor
+      profesorEdit(id: String!, teacher: EditTeacher): Profesor
+      profesorDelete(id: String!): Profesor
       cursoAdd(course: NewCourse): Curso
-      cursoEdit(idCourse: String!, course: EditCourse): Curso
-      cursoDelete(idCourse: String!): Curso
+      cursoEdit(id: String!, course: EditCourse): Curso
+      cursoDelete(id: String!): Curso
    }
 `
 

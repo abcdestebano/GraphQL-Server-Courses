@@ -18,6 +18,24 @@ async function getAllTeachers() {
 }
 
 /**
+ * Get a teacher by name from database
+ *
+ * @param {*} id
+ * @returns
+ */
+async function getTeacherByName(nombre) {
+   try {
+      const teachers = await Profesor.find({ nombre: { '$regex': nombre } }).populate({
+         path: 'cursos',
+         populate: { path: "comentarios" }
+      })
+      return teachers
+   } catch (error) {
+      throw new Error(error)
+   }
+}
+
+/**
  * Get a teacher by Id from database
  *
  * @param {*} id
@@ -91,6 +109,7 @@ async function deleteTeacher(id) {
 
 module.exports = {
    getAllTeachers,
+   getTeacherByName,
    getTeacher,
    createTeacher,
    updateTeacher,

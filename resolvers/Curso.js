@@ -18,6 +18,24 @@ async function getAllCourses() {
 }
 
 /**
+ * Get a course by title from database
+ *
+ * @param {*} id
+ * @returns
+ */
+async function getCourseByName(titulo) {
+   try {
+      const courses = await Curso.find({ titulo: { '$regex': titulo } })
+         .populate({ path: "profesor", populate: { path: "cursos" } })
+      // .populate("comentarios")
+
+      return courses
+   } catch (error) {
+      throw new Error(error)
+   }
+}
+
+/**
  * Get a course by Id from database
  *
  * @param {*} id
@@ -27,7 +45,7 @@ async function getCourse(id) {
    try {
       const course = await Curso.findById(id)
          .populate({ path: "profesor", populate: { path: "cursos" } })
-         .populate("comentarios")
+      // .populate("comentarios")
 
       return course
    } catch (error) {
@@ -91,6 +109,7 @@ async function deleteCourse(id) {
 
 module.exports = {
    getAllCourses,
+   getCourseByName,
    getCourse,
    createCourse,
    updateCourse,
